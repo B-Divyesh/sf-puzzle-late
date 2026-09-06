@@ -1,5 +1,13 @@
 # Puzzle Late handoff
 
+## Independent verification 1
+
+**Verdict: FAIL.** Verification on 2026-09-06 found 12 defects and 4 untested public claims. The complete report is in `.factory/verification-1.md`; evidence is under `/work/.evidence/`.
+
+The live hostname now resolves. Its JavaScript and CSS match implementation commit `cd2ed9aa0f223040c1cfb5d05502fa4772b2966a` byte for byte. The implementation remains buildable, and all declared claim commands, `npm test`, and `npm run build` pass. Live deterministic desktop and phone runs also reach win, loss, restart, and reset states without changing real progress.
+
+Acceptance is blocked by the first-screen game placement, dialog focus behavior, small touch targets, dead shelf links outside the home page, incorrect 200 status for unknown URLs, the final-free-puzzle boundary action, a false non-spoiler claim, three other unsupported claims, short hashed-asset caching, and a metaphorical loss heading. No product code was changed during verification.
+
 ## Release
 
 - Implementation commit: `cd2ed9aa0f223040c1cfb5d05502fa4772b2966a`
@@ -33,8 +41,8 @@ Browser run evidence: from `/demo`, selected the correct answer for “Blue kett
 
 `/work/.evidence/billing-offer.json` and `.factory/billing-offer.json` record the actual state: the brief calls for a one-time anthology, but no public price, currency, checkout, or license validation path has been registered. These values are intentionally null rather than guessed. Purchase and activation must not be claimed until the billing-registration operator completes that dependency.
 
-## Known gap and next step
+## Known gaps and next step
 
-The sole product dependency is billing registration for the planned one-time full anthology. Register a price/currency, checkout return, and license-validation path with the separate operator, then replace the unavailable button with a real verified flow. The free five-puzzle game is complete and independent of that work.
+Repair the findings in `.factory/verification-1.md`, deploy a new implementation candidate, and run verification again. Separately, billing registration remains required for the planned one-time full anthology. Register a price/currency, checkout return, and license-validation path with the separate operator before enabling purchase or activation.
 
-Deployment status is separate from product QA: `main` was pushed to GitHub at implementation SHA `cd2ed9a` and documentation SHA `3e55f1a`. A product-scoped `swa deploy dist --app-name sf-puzzle-late --env production` authenticated, then stalled while retrieving Static Web App settings; it was stopped after more than a minute. At the same time, `puzzle-late.sociobot.in` returned a DNS-resolution failure from this worker, so no cold HTTPS desktop/phone verification is claimed. The generated CLI credential file was moved out of the repository and `.env` is ignored. The next operator should resolve the static-app settings/DNS availability, deploy `dist/`, and then run the documented cold browser check.
+Deployment status is now verified separately from product acceptance: `puzzle-late.sociobot.in` serves the candidate over HTTPS, and fresh desktop and phone contexts were exercised. The source documentation baseline reviewed was `2ca46eb026a06ff68ac5821c301702db494e6f4e`.
