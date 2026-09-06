@@ -1,5 +1,14 @@
 # Puzzle Late handoff
 
+## Verification 3
+
+- Independent QA verdict on 2026-09-06 UTC: **PASS — 0 findings and 0 untested claims.**
+- Reviewed implementation: `08cf7a9907c135bfc0a490f8c5ff97a813494478`; reviewed documentation baseline: `3c91994fd4ef9d771dda9a45ed8ecc116e9e7adf`.
+- A clean detached checkout passed `npm ci`, every one of the 13 declared claim commands separately, `npm test` (7 unit and 40 browser checks), and `npm run build`.
+- Fresh live desktop and phone contexts completed the demo win, loss, reset, restart, isolation, privacy, focus, route, and reduced-motion checks. The complete live suite passed all 40 checks. Live axe reported 0 violations; the worker URL verifier reported no console errors, one h1, `lang="en"`, a main landmark, and complete basic labels/alt coverage.
+- Live JS/CSS byte-match the fresh candidate build: JS `ffcf5970c2d6715300657f4de4aa83c032e20b3a2e6662d02f973ae316b68b2a`, CSS `2aa4dc00bf8ab68337d781f493f15243cf4ca8299cd4bf10b1bf1ef8e4d7a41d`. Evidence is in `/work/.evidence/puzzle-late-verify-3/`; the full report is `.factory/verification-3.md`.
+- All Verification 1 findings and Review 2’s semantic-deduction finding are now rechecked and resolved. Billing offer registration remains the only external follow-up; checkout stays disabled and is not a product-code gap.
+
 ## Release
 
 - Verdict: repair 2 completed and verified locally and live on 2026-09-06 UTC.
