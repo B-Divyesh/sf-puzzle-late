@@ -1,0 +1,31 @@
+{
+  "slug": "puzzle-late",
+  "title": "Puzzle Late",
+  "territory": "games-creative",
+  "user": "Daily-puzzle fans who finish a puzzle quickly and want more original, browser-native challenges available immediately without copying a newspaper game\u2019s archive.",
+  "evidence": [
+    {
+      "url": "https://hn.algolia.com/api/v1/items/45212389",
+      "date": "2025-09-11",
+      "quote_or_summary": "A Connections fan says that after finishing the daily puzzle 'that's it until tomorrow' and built a replay archive with optional hints to solve that limitation."
+    },
+    {
+      "url": "https://itch.io/t/6756606/browser-only-no-install-multiplayer-3d-anyone-else-skipping-the-downloadable-client",
+      "date": "2026-08-07",
+      "quote_or_summary": "An itch.io discussion argues for a true browser experience with 'no install, no account, just a tab'; replies also expose the need to budget for low-memory machines."
+    }
+  ],
+  "recurrence": "One player-facing thread documents the post-daily shortage; a separate browser-distribution discussion reinforces that immediate play and broad device support are valuable but require discipline.",
+  "current_workaround": "Replay a proprietary game through unofficial archives, wait until tomorrow, install a puzzle app, or browse a large unsorted puzzle site.",
+  "incumbents_and_gap": "NYT Games and Puzzmo create daily habits, while archive sites often depend on another publisher\u2019s content. The unresolved gap is a fully original, small puzzle anthology that is intentionally playable after the daily is done.",
+  "smallest_useful_product": "A zero-account browser anthology of 40 original 'late puzzles': each is a five-minute visual deduction about timing, shadows, or routes, with two optional non-spoiler nudges and a daily featured shelf. A completed run unlocks a tiny hand-drawn ending card; puzzle order adapts only locally. Non-goals: reproducing any newspaper puzzle, scraped archives, user chat, or 3D assets.",
+  "success_measure": "At least 45% of visitors complete two different puzzles in one session and fewer than 10% leave before opening a puzzle on a low-end mobile performance test.",
+  "artifact_class": "browser-game",
+  "monetization": "one-time \u2014 a complete original anthology has a clear paid value while the first five puzzles can remain free and ad-free.",
+  "constraints": "All puzzles, wording, and visual language must be original; no use of NYT or other publisher content; keep asset budget below a modest mobile page-load target and preserve accessibility labels.",
+  "est_build_effort": "M",
+  "scale": "small",
+  "why_distinct": "It solves the after-daily moment with original authored micro-puzzles rather than an unauthorized replay site or generic puzzle generator.",
+  "confidence": 4,
+  "state": "ADMITTED"
+}
