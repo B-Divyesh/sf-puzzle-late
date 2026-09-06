@@ -1,6 +1,6 @@
 {
   "name": "puzzle-late",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,7 +10,7 @@
     "test": "npm run test:unit && npm run test:browser",
     "test:unit": "vitest run",
     "test:browser": "playwright test",
-    "test:claims": "npm run test:unit -- -t @claim:authored-content && playwright test --grep @claim",
+    "test:claims": "npm run test:unit -- -t @claim && playwright test --grep @claim",
     "check": "npm run build && npm test"
   },
   "devDependencies": {

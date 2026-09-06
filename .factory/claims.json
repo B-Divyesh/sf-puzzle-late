@@ -1,65 +1,93 @@
 [
   {
     "id": "authored-content",
-    "claim": "Each anthology puzzle has its own title, ending, selectable answer, and two nudges.",
+    "claim": "Each of the 40 anthology puzzles has one selectable answer and its own ending.",
     "where": "Puzzle cards and anthology shelf",
     "test": "npm run test:unit -- -t @claim:authored-content",
-    "sandbox": "Validate the complete shipped puzzle collection."
+    "sandbox": "Validate all shipped puzzle records, unique titles and endings, and exactly one selectable answer per puzzle."
+  },
+  {
+    "id": "spoiler-free-nudges",
+    "claim": "Each puzzle has two distinct spoiler-free nudges.",
+    "where": "How to play and active puzzle",
+    "test": "npm run test:unit -- -t @claim:spoiler-free-nudges",
+    "sandbox": "Validate every shipped nudge and reject answer-only words or a named answer position."
   },
   {
     "id": "anthology-count",
-    "claim": "The anthology contains 40 original visual puzzles: 15 timing, 13 shadow, and 12 route deductions.",
+    "claim": "The anthology contains 40 visual puzzles: 15 timing, 13 shadow, and 12 route deductions.",
     "where": "Landing page and puzzle shelf",
     "test": "npm run test:browser -- --grep @claim:anthology-count",
-    "sandbox": "Fresh browser context; open the landing page and count each visible shelf category."
+    "sandbox": "Fresh browser context; count every visible shelf category."
   },
   {
     "id": "free-five",
-    "claim": "Five original puzzles are free to play.",
-    "where": "Landing page facts and puzzle shelf",
+    "claim": "Five puzzles are free to play.",
+    "where": "Landing page facts, terms, and puzzle shelf",
     "test": "npm run test:browser -- --grep @claim:free-five",
-    "sandbox": "Fresh browser context; open each free shelf card and verify that its answer controls are available."
+    "sandbox": "Fresh browser context; open every free puzzle and verify its answer and nudge controls."
   },
   {
     "id": "two-marks-two-nudges",
-    "claim": "Each puzzle starts with two marks and has two optional nudges.",
+    "claim": "Active play starts with two marks and offers two optional nudges.",
     "where": "How to play and active puzzle",
     "test": "npm run test:browser -- --grep @claim:two-marks-two-nudges",
-    "sandbox": "Fresh demo context; inspect the active puzzle and reveal both nudges."
+    "sandbox": "Fresh demo context; check both marks, reveal both nudges, and verify keyboard focus follows the new content."
   },
   {
     "id": "demo-isolated",
-    "claim": "Demo sample data never changes real progress.",
-    "where": "Demo banner and README",
+    "claim": "Demo play and reset never change real progress.",
+    "where": "Demo banner, README, and demo documentation",
     "test": "npm run test:browser -- --grep @claim:demo-isolated",
-    "sandbox": "Complete a real puzzle, complete a demo puzzle, reset demo, and compare the real storage value."
+    "sandbox": "Complete a real puzzle, play and reset the demo, leave it, and compare the real storage value byte for byte."
+  },
+  {
+    "id": "demo-persists",
+    "claim": "Sample completion stays in the demo after reload.",
+    "where": "README and demo documentation",
+    "test": "npm run test:browser -- --grep @claim:demo-persists",
+    "sandbox": "Complete the active sample puzzle, reload /demo, and verify the same isolated demo record and three completions."
   },
   {
     "id": "local-only",
     "claim": "No account or tracking is needed, and progress stays in this browser.",
-    "where": "Landing page facts and privacy page",
+    "where": "Landing page, privacy page, and README",
     "test": "npm run test:browser -- --grep @claim:local-only",
-    "sandbox": "Fresh browser context; solve and reload while recording all page requests. Only the product origin may be requested."
+    "sandbox": "Solve and reload in a fresh context while recording requests; progress remains and every request is same-origin."
   },
   {
     "id": "puzzle-ending",
-    "claim": "A correct deduction reaches a completion card with an ending.",
+    "claim": "A correct deduction reaches a completion card with its ending.",
     "where": "How to play",
     "test": "npm run test:browser -- --grep @claim:puzzle-ending",
-    "sandbox": "Fresh demo context; submit the authored correct answer for the active puzzle."
+    "sandbox": "Submit the authored correct answer in the demo and verify the named ending and focus target."
   },
   {
     "id": "restart-reset",
     "claim": "After a loss, restart restores the same puzzle with two marks.",
     "where": "Loss screen",
     "test": "npm run test:browser -- --grep @claim:restart-reset",
-    "sandbox": "Fresh demo context; submit two wrong answers then restart."
+    "sandbox": "Submit two wrong answers, reach the loss screen, restart, and verify the same puzzle and two marks."
   },
   {
     "id": "settings-persist",
     "claim": "The still-motion setting stays set after reload.",
-    "where": "Settings dialog",
+    "where": "Settings dialog and README",
     "test": "npm run test:browser -- --grep @claim:settings-persist",
-    "sandbox": "Fresh browser context; enable the setting, reload, and reopen Settings."
+    "sandbox": "Enable still motion in a fresh context, save, reload, and verify the setting remains checked."
+  },
+  {
+    "id": "real-reset",
+    "claim": "Local progress can be reset in Settings.",
+    "where": "Settings dialog, privacy page, and README",
+    "test": "npm run test:browser -- --grep @claim:real-reset",
+    "sandbox": "Complete a real puzzle, confirm reset, and verify completions clear while the motion setting remains."
+  },
+  {
+    "id": "billing-unavailable",
+    "claim": "Buying the full anthology is unavailable until offer registration is complete.",
+    "where": "Paid tier, terms, and README",
+    "test": "npm run test:browser -- --grep @claim:billing-unavailable",
+    "sandbox": "Fresh context; verify the purchase control is disabled and no checkout link or billing request exists."
   }
 ]

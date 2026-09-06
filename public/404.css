@@ -1,14 +1,16 @@
 * { box-sizing: border-box; }
 body { display: grid; min-height: 100vh; margin: 0; background: #f6eddb; color: #202647; font-family: Arial, sans-serif; }
 header, main, footer { width: min(1000px, calc(100% - 40px)); margin: auto; }
-header { display: flex; justify-content: space-between; padding: 24px 0; border-bottom: 1px solid #b4a78f; }
+header, header nav, footer, footer nav { display: flex; align-items: center; gap: 16px; }
+header { justify-content: space-between; min-height: 68px; border-bottom: 1px solid #b4a78f; }
 a { color: #38477d; text-underline-offset: .18em; }
+header a, footer a, .button { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; }
 .skip { position: fixed; top: -60px; left: 12px; padding: 8px 11px; background: #202647; color: #fffaf0; }
 .skip:focus { top: 12px; }
 main { display: grid; grid-template-columns: 1fr 220px; gap: 50px; align-items: center; padding: 60px 0; }
 h1 { margin: 0 0 18px; font-family: Georgia, serif; font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1; }
 .card { display: grid; aspect-ratio: .78; place-items: center; border: 1px solid #202647; background: #fffaf0; box-shadow: 10px 10px 0 #a85064; color: #56735d; font-family: Georgia, serif; font-size: 7rem; transform: rotate(4deg); }
 .button { display: inline-block; margin-top: 15px; padding: 11px 16px; background: #202647; color: #fffaf0; font-weight: bold; text-decoration: none; }
-footer { padding: 24px 0; border-top: 1px solid #b4a78f; color: #535b75; }
+footer { justify-content: space-between; flex-wrap: wrap; padding: 24px 0; border-top: 1px solid #b4a78f; color: #535b75; }
 *:focus-visible { outline: 3px solid #0b5d6d; outline-offset: 3px; }
-@media (max-width: 600px) { main { grid-template-columns: 1fr; padding: 35px 0; } .card { width: 160px; } }
+@media (max-width: 600px) { header, footer { align-items: flex-start; flex-direction: column; gap: 4px; } header nav, footer nav { gap: 8px; flex-wrap: wrap; } main { grid-template-columns: 1fr; padding: 35px 0; } .card { width: 160px; } }

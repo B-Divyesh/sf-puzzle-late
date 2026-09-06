@@ -59,8 +59,9 @@ export function saveProgress(mode: PlayMode, progress: Progress): void {
   window.localStorage.setItem(storageKey(mode), JSON.stringify(progress));
 }
 
-export function resetProgress(mode: PlayMode): Progress {
+export function resetProgress(mode: PlayMode, settings?: Settings): Progress {
   const progress = mode === 'demo' ? demoProgress() : defaultProgress();
+  if (settings) progress.settings = { ...settings };
   saveProgress(mode, progress);
   return progress;
 }

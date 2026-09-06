@@ -29,9 +29,13 @@ The dusk palette has a dark preference treatment in CSS. The product is not a ge
 
 Both font files are self-hosted from the installed OFL Fontsource packages at build time. No font or script is loaded from a CDN.
 
+## Responsive composition
+
+The first screen pairs the job and sample action with the active puzzle. At 1280×720, the full answer row is visible beside the introduction. At 390×664, the decorative diorama is removed, the copy is compressed, and the first answer control is visible without scrolling. Later sections stack on phones; puzzle controls and navigation keep 44 px targets.
+
 ## Interaction and motion
 
-The active puzzle is on the first screen. A player reads a diagram, chooses an answer, receives immediate correct/wrong feedback, and either reaches a small ending card or loses both marks and restarts. Standard buttons make the game usable with pointer, touch, Enter, and Space; all targets are at least 44 px.
+The active puzzle is on the first screen. A player reads a diagram, chooses an answer, receives immediate correct/wrong feedback, and either reaches a small ending card or loses both marks and restarts. Standard buttons make the game usable with pointer, touch, Enter, and Space; all targets are at least 44 px. End-state headings receive focus, and the modal settings dialog traps focus, closes with Escape, and returns focus to Settings.
 
 Motion is optional. There is no autoplay, looping animation, camera movement, sound, flashing, or timing requirement. The settings dialog has a local **Keep page motion still** choice, and `prefers-reduced-motion` disables smooth scrolling and any future transitions. The game has no real-time simulation because its challenge is deduction, not reaction time.
 
@@ -44,11 +48,11 @@ All 40 puzzles are authored in `src/data/puzzles.ts`; none are scraped, generate
 - Puzzles 16–28: light direction, shadow direction, and relative-length deductions.
 - Puzzles 29–40: route constraints, stops, required places, closed paths, and total beats.
 
-Each entry has one selectable valid answer, two non-spoiler nudges, a compact text-equivalent visual diagram, and a unique ending line. The unit suite validates this structure for the entire anthology. A dated local calculation selects the featured shelf item without sending the date anywhere.
+Each entry has one selectable valid answer, two spoiler-free nudges, a compact text-equivalent visual diagram, and a unique ending line. A nudge may explain an operation but may not name an answer-only word or identify a choice by position. The unit suite validates these rules across the full anthology. A dated local calculation selects the featured shelf item without sending the date anywhere.
 
 ## Original asset plan and provenance
 
-- `public/sf-puzzle-late-og.png` is the product’s 1200×630 social image. It was generated on 2026-09-06 with the factory image deployment (`factory-image`) from the prompt recorded in `public/sf-puzzle-late-og.png.json`, then cropped and optimized locally. It depicts an original paper house, hills, moon, trees, and path; it has no text, brands, people, or watermark. It was visually reviewed for seams, unintended symbols, and text artifacts.
+- `public/sf-puzzle-late-og.png` is the product’s 1200×630 social image. It was generated on 2026-09-06 with the factory image deployment (`factory-image`) from the prompt recorded in `public/sf-puzzle-late-og.png.json`, then cropped and optimized locally. It depicts an original paper house, hills, moon, trees, and path; it has no text, brands, people, or watermark. It was visually reviewed again during repair for seams, unintended symbols, brands, and text artifacts; none were found.
 - `public/sf-puzzle-late-og.webp` is a WebP derivative, and `public/apple-touch-icon.png` is a cropped app-icon derivative. Neither is part of the initial game load.
 - The first-screen diorama, puzzle diagrams, paper stack, and `public/favicon.svg` are hand-authored HTML/CSS/SVG shapes. They are original product assets, not a copied illustration system.
 

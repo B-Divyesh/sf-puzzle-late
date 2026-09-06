@@ -4,23 +4,22 @@ Checked 2026-09-06. Counts use space-separated words. All visible fixed landing 
 
 | Copy | Words | Result |
 | --- | ---: | --- |
-| 40 original puzzles | 3 | Pass |
-| Solve original visual puzzles | 4 | Pass |
+| 40 visual deductions | 3 | Pass |
+| Solve visual deduction puzzles | 4 | Pass |
 | For daily-puzzle fans who want another short challenge now. | 9 | Pass |
 | Try it with sample data | 5 | Pass |
-| Starts a saved sample run. | 5 | Pass |
-| Five free puzzles. | 3 | Pass |
-| No account or tracking. | 5 | Pass |
-| Progress stays in this browser. | 5 | Pass |
+| Opens Puzzle 3 with two completed. | 6 | Pass |
+| Five free. | 2 | Pass |
+| No tracking. | 2 | Pass |
+| Local progress. | 2 | Pass |
 | Play now | 2 | Pass |
-| Featured puzzle ready | 3 | Pass |
 | How to play | 3 | Pass |
 | Read the paper scene. | 4 | Pass |
 | Each puzzle gives the timing, shadow, or route clues you need. | 11 | Pass |
 | Choose one answer. | 3 | Pass |
-| You have two marks and two optional non-spoiler nudges. | 10 | Pass |
-| Finish a card. | 3 | Pass |
-| Each solution reveals a small ending and saves local progress. | 10 | Pass |
+| You have two marks and two optional spoiler-free nudges. | 9 | Pass |
+| Finish a puzzle. | 3 | Pass |
+| Each solution shows an ending and saves local progress. | 9 | Pass |
 | Today’s featured puzzle | 3 | Pass |
 | Choose a puzzle | 3 | Pass |
 | Your progress and privacy | 4 | Pass |
@@ -28,14 +27,14 @@ Checked 2026-09-06. Counts use space-separated words. All visible fixed landing 
 | There are no accounts, ads, analytics, or puzzle submissions. | 9 | Pass |
 | Read the privacy details | 4 | Pass |
 | Full anthology | 2 | Pass |
-| Get all 40 original puzzles | 5 | Pass |
+| Get all 40 puzzles | 4 | Pass |
 | Five puzzles are free. | 4 | Pass |
 | The complete anthology adds 35 timing, shadow, and route deductions with local progress. | 13 | Pass |
 | One-time purchase. | 2 | Pass |
 | Checkout and activation are not registered yet, so buying is not available on this release. | 15 | Pass |
 | Purchase registration pending | 3 | Pass |
 | This button is unavailable until the separate billing operator registers the offer. | 12 | Pass |
-| Original visual puzzles for a short break after the daily. | 10 | Pass |
+| Play timing, shadow, and route puzzles after the daily. | 9 | Pass |
 
 ## Dynamic play copy
 
@@ -45,8 +44,10 @@ Checked 2026-09-06. Counts use space-separated words. All visible fixed landing 
 | Puzzle question | 20 | Pass |
 | Nudge | 18 | Pass |
 | Puzzle ending | 13 | Pass |
-| Loss explanation | 18 | Pass |
-| Demo banner status | 9 | Pass |
+| Puzzle lost | 2 | Pass |
+| Loss explanation | 13 | Pass |
+| Demo — sample data, nothing is saved. | 7 | Pass |
+| Choose another free puzzle | 4 | Pass |
 
 No phrase uses a banned marketing word. The longest fixed sentence has 15 words.
 
