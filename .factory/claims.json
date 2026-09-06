@@ -3,8 +3,8 @@
     "id": "authored-content",
     "claim": "Each of the 40 anthology puzzles has one selectable answer and its own ending.",
     "where": "Puzzle cards and anthology shelf",
-    "test": "npm run test:unit -- -t @claim:authored-content",
-    "sandbox": "Validate all shipped puzzle records, unique titles and endings, and exactly one selectable answer per puzzle."
+    "test": "npm run test:browser -- --grep @claim:authored-content",
+    "sandbox": "Use an independent solution audit in isolated demo storage; submit both invalid choices to reach a loss, restart, then submit the valid choice and verify the distinct ending for all 40 puzzles."
   },
   {
     "id": "spoiler-free-nudges",

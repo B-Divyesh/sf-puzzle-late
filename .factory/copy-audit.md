@@ -41,9 +41,10 @@ Checked 2026-09-06. Counts use space-separated words. All visible fixed landing 
 | Copy pattern | Maximum words | Result |
 | --- | ---: | --- |
 | Puzzle scene | 12 | Pass |
-| Puzzle question | 20 | Pass |
-| Nudge | 18 | Pass |
-| Puzzle ending | 13 | Pass |
+| Puzzle question | 22 | Pass |
+| Nudge | 15 | Pass |
+| Puzzle ending | 12 | Pass |
+| Answer choice | 11 | Pass |
 | Puzzle lost | 2 | Pass |
 | Loss explanation | 13 | Pass |
 | Demo — sample data, nothing is saved. | 7 | Pass |

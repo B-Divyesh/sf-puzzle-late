@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { puzzles } from '../src/data/puzzles';
+import { puzzleSolutionAudit } from './fixtures/puzzle-solution-audit';
 
 async function solveActive(page: Page, puzzleId: number): Promise<void> {
   const puzzle = puzzles.find((item) => item.id === puzzleId);
@@ -11,6 +12,20 @@ async function solveActive(page: Page, puzzleId: number): Promise<void> {
 async function openPuzzle(page: Page, puzzleId: number): Promise<void> {
   await page.locator(`[data-puzzle="${puzzleId}"]`).click();
   await expect(page.locator('.game-card')).toContainText(`Puzzle ${puzzleId} of 40`);
+}
+
+async function activatePuzzleWithoutScroll(page: Page, puzzleId: number): Promise<void> {
+  await page.locator(`[data-puzzle="${puzzleId}"]`).evaluate((button: HTMLButtonElement) => button.click());
+  await expect(page.locator('.game-card')).toContainText(`Puzzle ${puzzleId} of 40`);
+}
+
+async function activateAnswerWithoutScroll(page: Page, choice: string): Promise<void> {
+  const activated = await page.locator('[data-answer]').evaluateAll((buttons, wantedChoice) => {
+    const button = buttons.find((candidate) => (candidate as HTMLButtonElement).dataset.answer === wantedChoice) as HTMLButtonElement | undefined;
+    button?.click();
+    return Boolean(button);
+  }, choice);
+  expect(activated, `The answer control for “${choice}” must be rendered.`).toBe(true);
 }
 
 async function expectTouchTargets(page: Page): Promise<void> {
@@ -33,6 +48,40 @@ test('@claim:free-five Five puzzles are free to play', async ({ page }) => {
     await openPuzzle(page, puzzleId);
     await expect(page.getByRole('button', { name: 'Show first nudge' })).toBeEnabled();
     await expect(page.locator('[data-answer]')).toHaveCount(3);
+  }
+});
+
+test('@claim:authored-content Every independently reviewed solution wins and every alternative loses', async ({ page }) => {
+  test.setTimeout(90_000);
+  expect(puzzleSolutionAudit).toHaveLength(40);
+  expect(new Set(puzzles.map((puzzle) => puzzle.title)).size).toBe(40);
+  expect(new Set(puzzles.map((puzzle) => puzzle.ending)).size).toBe(40);
+  await page.addInitScript((puzzleIds) => {
+    localStorage.setItem('demo:puzzle-late:progress:v1', JSON.stringify({
+      completed: puzzleIds,
+      selectedPuzzle: 1,
+      settings: { still: true },
+    }));
+  }, puzzles.map((puzzle) => puzzle.id));
+  await page.goto('/demo');
+
+  for (const audit of puzzleSolutionAudit) {
+    const puzzle = puzzles[audit.id - 1];
+    expect(audit.choiceValidity).toHaveLength(puzzle.choices.length);
+    expect(audit.choiceValidity.filter(Boolean), audit.reasoning).toHaveLength(1);
+    await activatePuzzleWithoutScroll(page, puzzle.id);
+    const invalidChoices = puzzle.choices.filter((_, index) => !audit.choiceValidity[index]);
+
+    await activateAnswerWithoutScroll(page, invalidChoices[0]);
+    await expect(page.locator('.attempts')).toContainText('1 mark left');
+    await activateAnswerWithoutScroll(page, invalidChoices[1]);
+    await expect(page.getByRole('heading', { name: 'Puzzle lost' })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Restart this puzzle' }).evaluate((button: HTMLButtonElement) => button.click());
+    const validChoice = puzzle.choices[audit.choiceValidity.findIndex(Boolean)];
+    await activateAnswerWithoutScroll(page, validChoice);
+    await expect(page.getByRole('heading', { name: 'Puzzle complete' })).toBeVisible();
+    await expect(page.locator('.round-ending')).toContainText(puzzle.ending);
   }
 });
 

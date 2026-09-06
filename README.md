@@ -34,7 +34,7 @@ npm test
 npm run build
 ```
 
-`npm test` runs puzzle validation and browser checks in desktop and phone contexts. It covers demo isolation, reset, local progress, privacy requests, completion, routes, keyboard focus, touch targets, and accessibility.
+`npm test` runs puzzle validation and browser checks in desktop and phone contexts. A separate solution fixture records the deduction for every puzzle. The browser suite tries both rejected choices, restarts, and completes all 40 puzzles. It also covers demo isolation, reset, local progress, privacy requests, routes, keyboard focus, touch targets, and accessibility.
 
 To run all public-claim checks only:
 

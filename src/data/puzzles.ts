@@ -196,8 +196,8 @@ const shadow: AuthoredPuzzle[] = [
     ending: 'The pond turns the sign into a second, wavering cut-out.', diagram: ['Sun ↑ north', 'Sign ▮', 'Pond ↓ south / shadow ↓'],
   },
   {
-    kind: 'shadow', title: 'Rose roof', scene: 'A rose roof overhangs a narrow porch.',
-    prompt: 'At dusk the roof shadow is shortest. What has changed from low morning sun?',
+    kind: 'shadow', title: 'Rose roof', scene: 'A rose roof overhangs a narrow porch near midday.',
+    prompt: 'Near midday the roof shadow is shortest. What changed from the low morning sun?',
     choices: ['The sun is higher', 'The roof is lower', 'The porch moved'], answer: 'The sun is higher',
     hints: ['Object height has not changed.', 'Compare light angles: a steeper angle reduces ground length.'],
     ending: 'The roof edge becomes a clean rose line on the page.', diagram: ['Low sun → long shadow', 'High sun → short shadow', 'Roof height stays fixed'],
@@ -264,9 +264,9 @@ const route: AuthoredPuzzle[] = [
   {
     kind: 'route', title: 'Indigo bridge', scene: 'A bridge links two quiet islands.',
     prompt: 'Which route uses the indigo bridge exactly once and reaches the island?',
-    choices: ['Dock → Indigo bridge → Island', 'Dock → Indigo bridge → Dock → Island', 'Dock → Rope bridge → Island'], answer: 'Dock → Indigo bridge → Island',
+    choices: ['Dock → Indigo bridge → Island', 'Dock → Indigo bridge → Dock → Indigo bridge → Island', 'Dock → Rope bridge → Island'], answer: 'Dock → Indigo bridge → Island',
     hints: ['The required bridge must appear once, not zero or twice.', 'Count the required crossing name in each option; accept a count of one.'],
-    ending: 'The indigo bridge folds into a line of night birds.', diagram: ['Dock—Indigo bridge—Island', 'Dock—Indigo bridge—Dock—Island', 'Dock—Rope bridge—Island'],
+    ending: 'The indigo bridge folds into a line of night birds.', diagram: ['Dock—Indigo bridge—Island', 'Dock—Indigo bridge—Dock—Indigo bridge—Island', 'Dock—Rope bridge—Island'],
   },
   {
     kind: 'route', title: 'Museum porch', scene: 'A porter carries a framed map to a museum.',
@@ -299,9 +299,9 @@ const route: AuthoredPuzzle[] = [
   {
     kind: 'route', title: 'Fold line', scene: 'A map is creased through a small town.',
     prompt: 'Which route crosses the fold line once and then stops at the studio?',
-    choices: ['Town → Fold line → Studio', 'Town → Fold line → Town → Studio', 'Town → Studio'], answer: 'Town → Fold line → Studio',
+    choices: ['Town → Fold line → Studio', 'Town → Fold line → Town → Fold line → Studio', 'Town → Studio'], answer: 'Town → Fold line → Studio',
     hints: ['Count the named crossing in each route.', 'Reject counts of zero and two; the required crossing count is one.'],
-    ending: 'The map crease becomes a narrow path to the studio door.', diagram: ['Town—Fold line—Studio', 'Town—Fold line—Town—Studio', 'Town—Studio'],
+    ending: 'The map crease becomes a narrow path to the studio door.', diagram: ['Town—Fold line—Studio', 'Town—Fold line—Town—Fold line—Studio', 'Town—Studio'],
   },
 ];
 
@@ -334,7 +334,7 @@ export function validatePuzzles(items: Puzzle[]): string[] {
   if (items.filter((item) => item.free).length !== 5) errors.push('Exactly five puzzles must be free.');
   items.forEach((item) => {
     if (new Set(item.choices).size !== item.choices.length) errors.push(`${item.title} has duplicate answer choices.`);
-    if (item.choices.filter((choice) => choice === item.answer).length !== 1) errors.push(`${item.title} has no single selectable correct answer.`);
+    if (item.choices.filter((choice) => choice === item.answer).length !== 1) errors.push(`${item.title} must list its configured answer exactly once.`);
     if (item.hints.length !== 2 || item.hints.some((hint) => hint.trim().length < 12)) errors.push(`${item.title} needs two useful hints.`);
     if (new Set(item.hints).size !== 2) errors.push(`${item.title} needs two distinct hints.`);
     if (item.hints.some((hint) => nudgeRevealsAnswer(item, hint))) errors.push(`${item.title} has a nudge that reveals its answer.`);

@@ -48,7 +48,7 @@ All 40 puzzles are authored in `src/data/puzzles.ts`; none are scraped, generate
 - Puzzles 16–28: light direction, shadow direction, and relative-length deductions.
 - Puzzles 29–40: route constraints, stops, required places, closed paths, and total beats.
 
-Each entry has one selectable valid answer, two spoiler-free nudges, a compact text-equivalent visual diagram, and a unique ending line. A nudge may explain an operation but may not name an answer-only word or identify a choice by position. The unit suite validates these rules across the full anthology. A dated local calculation selects the featured shelf item without sending the date anywhere.
+Each entry has one selectable valid answer, two spoiler-free nudges, a compact text-equivalent visual diagram, and a unique ending line. A nudge may explain an operation but may not name an answer-only word or identify a choice by position. A separate 40-row solution audit records the deduction for every puzzle. Browser tests submit both rejected choices, restart, and complete every puzzle with the audited answer and ending. A dated local calculation selects the featured shelf item without sending the date anywhere.
 
 ## Original asset plan and provenance
 

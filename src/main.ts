@@ -71,7 +71,7 @@ function footer(): string {
   return `<footer class="site-footer">
     <p>Play timing, shadow, and route puzzles after the daily.</p>
     <nav aria-label="Footer navigation">${routeLink('/privacy', 'Privacy')} ${routeLink('/terms', 'Terms')} <span>Built by Param Factory</span></nav>
-    <p class="build-id">v1.1.0</p>
+    <p class="build-id">v1.1.1</p>
   </footer>`;
 }
 
