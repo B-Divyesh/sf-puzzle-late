@@ -5,7 +5,7 @@ header, header nav, footer, footer nav { display: flex; align-items: center; gap
 header { justify-content: space-between; min-height: 68px; border-bottom: 1px solid #b4a78f; }
 a { color: #38477d; text-underline-offset: .18em; }
 header a, footer a, .button { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; }
-.skip { position: fixed; top: -60px; left: 12px; padding: 8px 11px; background: #202647; color: #fffaf0; }
+.skip { position: fixed; top: -60px; left: 12px; display: inline-flex; min-height: 44px; align-items: center; padding: 8px 11px; background: #202647; color: #fffaf0; }
 .skip:focus { top: 12px; }
 main { display: grid; grid-template-columns: 1fr 220px; gap: 50px; align-items: center; padding: 60px 0; }
 h1 { margin: 0 0 18px; font-family: Georgia, serif; font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1; }

@@ -95,7 +95,7 @@ test('@claim:local-only Progress remains local and play makes no third-party req
   await solveActive(page, 1);
   await page.reload();
   await expect(page.locator('.puzzle-chip').filter({ hasText: 'Last lantern' })).toContainText('Complete');
-  expect([...requestOrigins]).toEqual(['http://127.0.0.1:4173']);
+  expect([...requestOrigins]).toEqual([new URL(page.url()).origin]);
 });
 
 test('@claim:puzzle-ending A correct deduction reaches its completion card and ending', async ({ page }) => {
@@ -182,7 +182,7 @@ test('the modal settings dialog traps focus, closes with Escape, and restores fo
 });
 
 test('all visible links and buttons meet the 44 pixel touch target minimum', async ({ page }) => {
-  for (const route of ['/', '/demo', '/privacy', '/terms']) {
+  for (const route of ['/', '/demo', '/privacy', '/terms', '/404.html']) {
     await page.goto(route);
     await expectTouchTargets(page);
   }
@@ -231,7 +231,7 @@ test('keyboard play, locked feedback, invalid storage recovery, and reduced moti
 });
 
 test('known routes return 200 and unknown routes return a designed 404', async ({ page }) => {
-  for (const route of ['/', '/demo', '/privacy', '/terms']) {
+  for (const route of ['/', '/demo', '/privacy', '/terms', '/404.html']) {
     const response = await page.goto(route);
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toHaveCount(1);
@@ -244,7 +244,7 @@ test('known routes return 200 and unknown routes return a designed 404', async (
 });
 
 test('home, demo, legal, and missing pages have no serious accessibility violations', async ({ page }) => {
-  for (const route of ['/', '/demo', '/privacy', '/terms', '/not-a-puzzle']) {
+  for (const route of ['/', '/demo', '/privacy', '/terms', '/404.html', '/not-a-puzzle']) {
     await page.goto(route);
     const results = await new AxeBuilder({ page: page as never }).analyze();
     expect(results.violations.filter((violation) => ['critical', 'serious'].includes(violation.impact ?? ''))).toEqual([]);
