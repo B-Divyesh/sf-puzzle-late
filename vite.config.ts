@@ -24,7 +24,7 @@ export default defineConfig({
     },
     configurePreviewServer(server) {
       server.middlewares.use(async (request, response, next) => {
-        if (!isUnknownRoute(request.url) || !request.headers.accept?.includes('text/html')) return next();
+        if (!isUnknownRoute(request.url)) return next();
         const html = await readFile(resolve(process.cwd(), 'dist/index.html'), 'utf8');
         response.statusCode = 404;
         response.setHeader('Content-Type', 'text/html; charset=utf-8');

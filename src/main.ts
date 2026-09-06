@@ -339,7 +339,8 @@ function attachEvents(): void {
   });
   app.querySelector<HTMLDialogElement>('.settings-dialog')?.addEventListener('keydown', (event) => {
     if (event.key !== 'Tab') return;
-    const dialog = event.currentTarget;
+    const dialog = event.currentTarget as HTMLDialogElement | null;
+    if (!dialog) return;
     const focusable = [...dialog.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')];
     const first = focusable[0];
     const last = focusable.at(-1);

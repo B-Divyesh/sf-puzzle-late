@@ -249,4 +249,8 @@ test('home, demo, legal, and missing pages have no serious accessibility violati
     const results = await new AxeBuilder({ page: page as never }).analyze();
     expect(results.violations.filter((violation) => ['critical', 'serious'].includes(violation.impact ?? ''))).toEqual([]);
   }
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await page.goto('/');
+  const darkResults = await new AxeBuilder({ page: page as never }).analyze();
+  expect(darkResults.violations.filter((violation) => ['critical', 'serious'].includes(violation.impact ?? ''))).toEqual([]);
 });
