@@ -1,5 +1,16 @@
 # Puzzle Late handoff
 
+## Verification 4 — independent QA
+
+- Current result on 2026-09-06 UTC: **PASS — 0 findings and 0 untested claims.**
+- Reviewed implementation: `9ba4ada51159d6de6304154f45affc55ba3bacf4`; reviewed documentation baseline: `1a3c90b351702ba0e113da210c6f9024d5ec1f2b`.
+- A clean detached checkout passed `npm ci`, all 13 declared claim commands separately, `npm test` (7 unit and 42 browser checks), and `npm run build`.
+- Fresh live desktop and phone contexts stated the job **Solve visual deduction puzzles**, the audience **For daily-puzzle fans who want another short challenge now.**, and the first action **Try it with sample data** before scrolling. The active game and first answer were on screen in both profiles. The one-click sample showed its persistent label, won, reloaded with sample progress, and reset without console errors.
+- The complete live browser suite passed all 42 checks. Live axe found no serious or critical issue; the URL verifier passed with title, language, h1, main, alt, button-label, and console checks. Mobile Lighthouse was 100 Performance, 100 Accessibility, 100 Best Practices, and 100 SEO.
+- Live JavaScript and CSS byte-match a fresh build: JS `bed513389482772b8e490e9796895eb47235c429d491172f955126d564329ebe`; CSS `6e6ec58e62635618fb3cf3bcc13c59810b4e3a252cf57f07b75c78401e036ea0`.
+- Every prior verification/review finding is now resolved, including Review 3’s generated-social-art disclosure. The disclosure is present in every SPA footer and the standalone public 404 footer.
+- Evidence: `.factory/verification-4.md` and `/work/.evidence/puzzle-late-verify-4/`. The required factory copies are `/work/.evidence/qa-report.md` and `/work/.evidence/qa-result.json`.
+
 ## Repair 3 — public social-art disclosure
 
 - Current result on 2026-09-06 UTC: **PASS — the Review 3 minor finding is resolved; no product finding or untested public claim remains.**
