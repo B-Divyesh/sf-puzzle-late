@@ -1,5 +1,15 @@
 # Puzzle Late handoff
 
+## Review 3
+
+- Strict review verdict on 2026-09-06 UTC: **FAIL — 1 minor finding and 0 untested claims.**
+- Reviewed implementation: `08cf7a9907c135bfc0a490f8c5ff97a813494478`; documentation baseline: `efbbccf1d87f34b6fff7d0fa90cc5db2fa46c1ed`.
+- Product behavior is clean: all 13 claim commands passed separately, `npm test` passed with 7 unit and 40 browser checks, `npm run build` produced `dist/`, and all 40 live browser checks passed.
+- Fresh desktop and phone contexts completed the sample win, loss, reload, reset, restart, and isolated exit. Live axe found 0 violations on 12 route/profile combinations. Lighthouse scored 100 in all four categories.
+- The one remaining issue is documentation visible to visitors: the generated social preview image is fully recorded in `.factory/design.md`, but the supplied image-generation contract requires a disclosure in the public footer or an About page. No product code was changed during review.
+- Required next step: add a short generated-social-art disclosure to the shared footer, deploy, and recheck the footer on home, demo, privacy, terms, and missing-page routes.
+- Full report: `.factory/review-3.md`. Evidence: `/work/.evidence/puzzle-late-review-3/`.
+
 ## Verification 3
 
 - Independent QA verdict on 2026-09-06 UTC: **PASS — 0 findings and 0 untested claims.**
