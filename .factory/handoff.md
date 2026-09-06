@@ -4,6 +4,7 @@
 
 - Verdict: repaired and verified locally and live on 2026-09-06 UTC.
 - Implementation commit: `fb43ad6020bfb715056d473ddc568ca0d93a15ad`.
+- Documentation baseline: `073814f06564a66319cbb1903c64dc568b9a6bc3`.
 - Live URL: `https://puzzle-late.sociobot.in`.
 - Product: a one-player browser anthology for daily-puzzle fans who want another short timing, shadow, or route deduction.
 - Stack: Vite and vanilla TypeScript. Static output is in `dist/`; there is no backend or shared database.
