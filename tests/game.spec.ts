@@ -292,6 +292,13 @@ test('known routes return 200 and unknown routes return a designed 404', async (
   await expect(page.getByRole('link', { name: 'Play a puzzle' })).toBeVisible();
 });
 
+test('every public footer discloses the generated social preview artwork', async ({ page }) => {
+  for (const route of ['/', '/demo', '/privacy', '/terms', '/404.html', '/not-a-puzzle']) {
+    await page.goto(route);
+    await expect(page.locator('footer')).toContainText('Social preview artwork was generated for Puzzle Late.');
+  }
+});
+
 test('home, demo, legal, and missing pages have no serious accessibility violations', async ({ page }) => {
   for (const route of ['/', '/demo', '/privacy', '/terms', '/404.html', '/not-a-puzzle']) {
     await page.goto(route);

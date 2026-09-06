@@ -35,6 +35,7 @@ Checked 2026-09-06. Counts use space-separated words. All visible fixed landing 
 | Purchase registration pending | 3 | Pass |
 | This button is unavailable until the separate billing operator registers the offer. | 12 | Pass |
 | Play timing, shadow, and route puzzles after the daily. | 9 | Pass |
+| Social preview artwork was generated for Puzzle Late. | 8 | Pass |
 
 ## Dynamic play copy
 

@@ -56,4 +56,4 @@ Each entry has one selectable valid answer, two spoiler-free nudges, a compact t
 - `public/sf-puzzle-late-og.webp` is a WebP derivative, and `public/apple-touch-icon.png` is a cropped app-icon derivative. Neither is part of the initial game load.
 - The first-screen diorama, puzzle diagrams, paper stack, and `public/favicon.svg` are hand-authored HTML/CSS/SVG shapes. They are original product assets, not a copied illustration system.
 
-The generated social image is disclosed as factory-generated product imagery by this provenance record. Runtime play does not send images or puzzle data to any model or service.
+The shared public footer says, “Social preview artwork was generated for Puzzle Late.” This gives visitors the required disclosure while this provenance record retains the prompt and technical details. Runtime play does not send images or puzzle data to any model or service.
