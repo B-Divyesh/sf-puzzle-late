@@ -36,3 +36,5 @@ Browser run evidence: from `/demo`, selected the correct answer for “Blue kett
 ## Known gap and next step
 
 The sole product dependency is billing registration for the planned one-time full anthology. Register a price/currency, checkout return, and license-validation path with the separate operator, then replace the unavailable button with a real verified flow. The free five-puzzle game is complete and independent of that work.
+
+Deployment status is separate from product QA: `main` was pushed to GitHub at implementation SHA `cd2ed9a` and documentation SHA `3e55f1a`. A product-scoped `swa deploy dist --app-name sf-puzzle-late --env production` authenticated, then stalled while retrieving Static Web App settings; it was stopped after more than a minute. At the same time, `puzzle-late.sociobot.in` returned a DNS-resolution failure from this worker, so no cold HTTPS desktop/phone verification is claimed. The generated CLI credential file was moved out of the repository and `.env` is ignored. The next operator should resolve the static-app settings/DNS availability, deploy `dist/`, and then run the documented cold browser check.
