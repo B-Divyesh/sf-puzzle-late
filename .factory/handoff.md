@@ -4,6 +4,7 @@
 
 - Current result on 2026-09-06 UTC: **PASS — the Review 3 minor finding is resolved; no product finding or untested public claim remains.**
 - Deployed implementation: `9ba4ada51159d6de6304154f45affc55ba3bacf4` (`fix: disclose generated social artwork`), version 1.1.2.
+- Documentation baseline: `86ecadd64351453d13a72d9f471744ce6ff22d4a` (`docs: record repair 3 verification`), which records evidence only and does not change the deployed product.
 - Scope: the generated 1200×630 Open Graph/Twitter social image already had full internal provenance. This repair adds the required visitor-facing disclosure without changing gameplay, storage, payment availability, or the anthology’s paid boundary.
 
 ### What changed
