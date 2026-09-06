@@ -1,5 +1,16 @@
 # Puzzle Late handoff
 
+## Review 4 — strict independent review
+
+- Current result on 2026-09-06 UTC: **PASS — 0 findings and 0 untested claims.**
+- Reviewed implementation: `9ba4ada51159d6de6304154f45affc55ba3bacf4`; documentation baseline: `9dc12ebb437b0c7a2fe1053f68e65e06378bc98a`.
+- A clean detached checkout passed `npm ci`, `npm run build`, `npm test` (7 unit and 42 browser checks), and every one of the 13 declared claim commands separately.
+- Fresh live desktop and phone contexts stated the job **Solve visual deduction puzzles**, the audience **For daily-puzzle fans who want another short challenge now.**, and the first action **Try it with sample data** before scrolling. The active puzzle and first answer fit each viewport. The one-click demo showed its persistent label, both nudges, a completion ending, reload persistence, and reset; it made only same-origin requests and had no console or page errors.
+- The full live Playwright suite passed all 42 checks, including privacy, storage isolation, loss/restart, keyboard/focus, reduced motion, legal routes, designed 404, touch targets, accessibility, and the free-five boundary. Live axe reported no serious or critical issue.
+- Fresh-build and live SHA-256 values match: JavaScript `bed513389482772b8e490e9796895eb47235c429d491172f955126d564329ebe`; CSS `6e6ec58e62635618fb3cf3bcc13c59810b4e3a252cf57f07b75c78401e036ea0`. The URL check passed with title, language, one h1, main, alt, button-label, and console checks.
+- Every earlier finding, including the invalid-deduction, claim-coverage, and generated-social-art-disclosure findings, remains resolved. Billing registration remains the explicitly disclosed external operator task; it exposes no checkout or price and is not a product-code gap.
+- Full report: `.factory/review-4.md`. Required factory copies: `/work/.evidence/qa-report.md` and `/work/.evidence/qa-result.json`.
+
 ## Verification 4 — independent QA
 
 - Current result on 2026-09-06 UTC: **PASS — 0 findings and 0 untested claims.**
