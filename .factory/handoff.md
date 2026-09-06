@@ -1,48 +1,69 @@
 # Puzzle Late handoff
 
-## Independent verification 1
-
-**Verdict: FAIL.** Verification on 2026-09-06 found 12 defects and 4 untested public claims. The complete report is in `.factory/verification-1.md`; evidence is under `/work/.evidence/`.
-
-The live hostname now resolves. Its JavaScript and CSS match implementation commit `cd2ed9aa0f223040c1cfb5d05502fa4772b2966a` byte for byte. The implementation remains buildable, and all declared claim commands, `npm test`, and `npm run build` pass. Live deterministic desktop and phone runs also reach win, loss, restart, and reset states without changing real progress.
-
-Acceptance is blocked by the first-screen game placement, dialog focus behavior, small touch targets, dead shelf links outside the home page, incorrect 200 status for unknown URLs, the final-free-puzzle boundary action, a false non-spoiler claim, three other unsupported claims, short hashed-asset caching, and a metaphorical loss heading. No product code was changed during verification.
-
 ## Release
 
-- Implementation commit: `cd2ed9aa0f223040c1cfb5d05502fa4772b2966a`
-- Product: a zero-account browser anthology for daily-puzzle fans who want another short original deduction after the daily.
-- Stack: Vite + vanilla TypeScript, static output in `dist/`.
+- Verdict: repaired and verified locally and live on 2026-09-06 UTC.
+- Implementation commit: `fb43ad6020bfb715056d473ddc568ca0d93a15ad`.
+- Live URL: `https://puzzle-late.sociobot.in`.
+- Product: a one-player browser anthology for daily-puzzle fans who want another short timing, shadow, or route deduction.
+- Stack: Vite and vanilla TypeScript. Static output is in `dist/`; there is no backend or shared database.
 
-## What was built
+## What changed
 
-- A 40-puzzle anthology: 15 timing, 13 shadow, and 12 route deductions. Each entry has a valid selectable answer, two non-spoiler nudges, an accessible text-equivalent diagram, and a unique ending.
-- The first five puzzles are playable free. The full 35-puzzle addition is preserved as a one-time-purchase deliverable but is visibly unavailable until the separate billing operator registers checkout and license validation.
-- Direct active play on the first screen. A run has two marks; two wrong answers show a loss card with restart; a correct answer keeps the solved puzzle card on screen for its own ending and then offers the next free puzzle.
-- `/demo` starts a populated sample run with Puzzles 1 and 2 complete and Puzzle 3 open. It uses `demo:puzzle-late:progress:v1`; real progress uses `puzzle-late:progress:v1`. Reset and Start for real are both implemented.
-- Local progress, local settings, keyboard operation, touch targets, dark preference colors, reduced motion, native dialog focus, legal pages, sitemap, robots, static headers, and a designed 404 page.
-- A paper-diorama-at-dusk visual system with local Fraunces and Atkinson Hyperlegible fonts. The social image is original factory-generated art with its prompt/provenance sidecar; gameplay art is hand-authored CSS/SVG.
+- Put active play beside the job statement and sample action. At 1280×720 the game starts at y=117 and the first answer ends at y=579. At 390×664 it starts at y=296 and the first answer ends at y=647.
+- Made Settings a modal dialog with a focus loop, Escape close, and focus restoration. Win and loss headings now receive focus.
+- Raised every visible link and button target to at least 44×44 px, including the standalone 404 skip link.
+- Made Puzzles navigate to the shelf from every route, with History API, scroll, title, and focus restoration.
+- Limited static rewrites to `/demo`, `/privacy`, and `/terms`. Unknown public URLs now return HTTP 404 with the designed page.
+- Replaced the final-free-puzzle duplicate action with **Choose another free puzzle**.
+- Rewrote all 80 nudges so they teach a deduction step without naming an answer-only word or answer position. Unit validation covers all 40 puzzles.
+- Removed unsupported five-minute and public originality claims. Internal authorship and asset provenance remain documented in `.factory/design.md`.
+- Declared and tested demo persistence. The demo label remains visible across demo, privacy, and terms routes.
+- Added a confirmed real-progress reset in Settings that preserves the motion setting.
+- Added one-year immutable caching for hashed assets. The live JavaScript now returns `Cache-Control: public, max-age=31536000, immutable`.
+- Replaced the metaphorical loss heading with **Puzzle lost**.
+
+## Finding disposition
+
+| Finding | Result |
+| --- | --- |
+| F-01 first-screen game | Fixed; active game and first answer fit in both required initial viewports. |
+| F-02 focus failures | Fixed; modal trapping, Escape, opener restoration, and end-state focus are browser-tested. |
+| F-03 small targets | Fixed; desktop and phone checks cover home, demo, legal, and standalone 404 pages. |
+| F-04 dead Puzzles link | Fixed; legal-route navigation reaches and focuses the shelf. |
+| F-05 unknown URL returns 200 | Fixed; live unknown URLs return 404 and the designed recovery page. |
+| F-06 last free boundary | Fixed; no nonexistent next-puzzle action remains after Puzzle 5. |
+| F-07 spoiler claim | Fixed; all nudges were rewritten and the claim now has a full-collection test. |
+| F-08 five-minute claim | Fixed by removing the unsupported duration from public metadata and copy. |
+| F-09 originality claim | Fixed by removing unprovable public wording; provenance remains an internal design record. |
+| F-10 demo persistence claim | Fixed; claim declared and reload outcome tested. |
+| F-11 short asset cache | Fixed; live hashed assets have a one-year immutable policy. |
+| F-12 metaphorical loss heading | Fixed with the plain heading **Puzzle lost**. |
 
 ## Verification
 
-From a clean dependency install (`npm ci`):
+From the documented clean setup:
 
-- `npm test` — passed: 4 unit tests and 22 Playwright checks across desktop and phone emulation.
-- `npm run test:claims` — passed: the authored-content unit claim plus 16 desktop/phone outcome checks.
-- `npm run build` — passed; output is `dist/`. The initial bundle is 12.31 KB gzip JavaScript and 4.21 KB gzip CSS.
-- `/opt/fleet/lib/verify-url.sh http://127.0.0.1:4174/ …` against the built preview — passed: title, `lang`, one h1, main landmark, alt/button checks, and no console errors. Preview load recorded at 577 ms.
-- Playwright axe integration — passed in both desktop and phone runs with no serious or critical violations.
-- Lighthouse mobile preview — 100 Performance, 100 Accessibility, 100 Best Practices, and 100 SEO. FCP/LCP 1.2 s, TBT 30 ms, CLS 0, total transfer 53 KiB.
-- Frame sampling on the built 390 px preview recorded 120 `requestAnimationFrame` intervals with a 16.67 ms mean and median (about 60 fps). This is a local headless measurement, not a public performance claim; Puzzle Late has no continuous simulation loop.
+- `npm ci` — passed; 63 packages installed and 0 vulnerabilities reported.
+- Every one of the 13 commands in `.factory/claims.json` — passed separately. Each unit claim ran once; every browser claim passed on desktop and phone.
+- `npm test` — passed on the final tree: 5 unit tests and 38 Playwright checks.
+- `npm run test:claims` — passed: 2 tagged unit outcomes and 22 tagged browser outcomes.
+- `npm run build` — passed; JavaScript is 40.59 KB raw / 13.12 KB gzip and CSS is 16.48 KB raw / 4.54 KB gzip.
+- Playwright axe integration — no serious or critical issues on home, demo, privacy, terms, in-app missing, or standalone 404 pages; light and dark preferences checked.
+- Worker URL verification on the final live deployment — HTTP 200, 617 ms load, no console errors, title, `lang`, one h1, main landmark, alt and button checks passed.
+- Live Lighthouse mobile — 100 Performance, 100 Accessibility, 100 Best Practices, 100 SEO; FCP 1.1 s, LCP 1.2 s, TBT 40 ms, CLS 0.036, 54 KiB transfer.
+- Live 390 px frame sample — 120 frames, 16.42 ms mean, 16.7 ms median, about 60.9 fps. This is verification evidence, not public copy.
+- Full live Playwright suite — 38 desktop/phone checks passed on the unchanged main JS/CSS bundle. After the final 404-only adjustment, 6 additional live route, touch-target, and axe checks passed.
+- Live headers — unknown URL 404; known routes 200; CSP, HSTS, nosniff, referrer, and permissions policies present; hashed JavaScript cache is immutable for one year.
 
-Browser run evidence: from `/demo`, selected the correct answer for “Blue kettle” and reached the ending “Steam turns into a small blue paper moon.” Submitted two wrong answers to reach “This page folded away,” then restarted and restored two marks. The browser suite also tested keyboard answer submission, a locked anthology-card explanation, settings persistence, route titles, unknown-route recovery, and demo isolation.
+The deterministic live run entered `/demo`, showed Puzzle 3 and two completed samples, revealed both nudges, selected **Cup**, and reached **Puzzle complete** with its ending. A replay selected **Spoon** and **Kettle**, reached **Puzzle lost**, then restarted with two marks. Reset restored two sample completions. Fresh desktop and 390 px phone contexts made only same-origin requests and logged no console errors. Screenshots and videos are under `/work/.evidence/puzzle-late-repair/`.
 
-## Public offer metadata
+## Deployment
 
-`/work/.evidence/billing-offer.json` and `.factory/billing-offer.json` record the actual state: the brief calls for a one-time anthology, but no public price, currency, checkout, or license validation path has been registered. These values are intentionally null rather than guessed. Purchase and activation must not be claimed until the billing-registration operator completes that dependency.
+The first generic `swa deploy` attempt authenticated but stalled while retrieving app settings and was stopped. Its generated `.env` credential file was deleted without being read. The product-scoped factory deployment helper then reused only `sf-puzzle-late`, deployed successfully, preserved the existing custom domain, and confirmed managed HTTPS. The final deployed implementation is `fb43ad6020bfb715056d473ddc568ca0d93a15ad`; the live main assets are `index-DonU6JX1.js` and `index-BTlkkWvI.css`.
 
-## Known gaps and next step
+## Known dependency
 
-Repair the findings in `.factory/verification-1.md`, deploy a new implementation candidate, and run verification again. Separately, billing registration remains required for the planned one-time full anthology. Register a price/currency, checkout return, and license-validation path with the separate operator before enabling purchase or activation.
+Billing registration is still external and intentionally unavailable. The five free puzzles work. The 35 paid puzzles remain authored and locked. `.factory/billing-offer.json` records the one-time offer with null price and currency because no public price, checkout, or license-validation path has been registered. The billing operator must register those values before purchase or activation is enabled.
 
-Deployment status is now verified separately from product acceptance: `puzzle-late.sociobot.in` serves the candidate over HTTPS, and fresh desktop and phone contexts were exercised. The source documentation baseline reviewed was `2ca46eb026a06ff68ac5821c301702db494e6f4e`.
+The external `/work/.evidence/qa-result.json` named by the work order was not present in this worker. The complete committed `.factory/verification-1.md` was used as the 12-finding source of truth, alongside all earlier handoff revisions in git history.
