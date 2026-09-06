@@ -1,0 +1,16 @@
+{
+  "slug": "puzzle-late",
+  "name": "Puzzle Late Complete Anthology",
+  "price_minor": null,
+  "currency": null,
+  "price_type": "one_time_price",
+  "return_url": "https://puzzle-late.sociobot.in/",
+  "price_evidence": "The admitted brief specifies a one-time complete anthology but gives no public price or currency. No offer was registered in the scaffold or this release, so price_minor and currency are null rather than guessed.",
+  "paid_features": [
+    "Access to the 35 authored anthology puzzles beyond the five free puzzles",
+    "Timing, shadow, and route deductions with two nudges and ending cards",
+    "Local browser progress for the full 40-puzzle collection"
+  ],
+  "license_validation_path": null,
+  "registration_status": "No checkout or license-validation integration is deployed. Separate billing registration is required before purchase or activation can be claimed."
+}

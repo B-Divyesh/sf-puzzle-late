@@ -1,0 +1,28 @@
+{
+  "name": "puzzle-late",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "npm run test:unit && npm run test:browser",
+    "test:unit": "vitest run",
+    "test:browser": "playwright test",
+    "test:claims": "npm run test:unit -- -t @claim:authored-content && playwright test --grep @claim",
+    "check": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
+    "@playwright/test": "1.58.2",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.3",
+    "vite": "^7.1.7",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "@fontsource/atkinson-hyperlegible": "^5.2.6",
+    "@fontsource/fraunces": "^5.2.6"
+  }
+}
