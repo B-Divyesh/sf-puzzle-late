@@ -77,3 +77,14 @@ The external `/work/.evidence/qa-result.json` named by the work order was not pr
 - The full 38-check Playwright suite also passed directly against the live URL. Fresh desktop and 390 px phone runs completed the isolated demo, win, loss, restart, reset, keyboard-focus, privacy, route, reduced-motion, and designed-404 paths.
 - Live main JavaScript and CSS match the fresh build byte for byte by SHA-256. The hashed JavaScript is immutable for one year.
 - Full evidence and earlier-finding disposition: `.factory/verification-2.md`. External QA report: `/work/.evidence/qa-report.md`; result JSON: `/work/.evidence/qa-result.json`.
+
+## Review 1
+
+- Strict fresh-review verdict: **PASS** — 0 findings and 0 untested claims.
+- Candidate implementation: `fb43ad6020bfb715056d473ddc568ca0d93a15ad`; documentation baseline: `a9d576068c5d613970d32117cd2443a2025257f9`.
+- A fresh clone passed `npm ci`, all 13 claim commands separately, `npm test` (5 unit and 38 browser checks), and `npm run build`.
+- The unchanged live implementation passed the full 38-check desktop/phone suite. Fresh recorded contexts also completed sample entry, both nudges, win, reload persistence, reset, loss, restart, and demo exit without changing real progress.
+- All 40 puzzle records were inspected for a supported selectable answer, two spoiler-free nudges, and a distinct ending.
+- Worker URL verification, live axe checks, keyboard/focus, 44 px targets, reduced motion, 200% text, links, route titles, designed HTTP 404, legal pages, dark preference, local-only traffic, and security headers passed.
+- Fresh mobile Lighthouse scored 100 Performance, 100 Accessibility, 100 Best Practices, and 100 SEO; LCP was 1.1 s, TBT 0 ms, CLS 0.036, and transfer 54 KiB.
+- Live JavaScript and CSS hashes match the fresh candidate build. Full report: `.factory/review-1.md`; evidence: `/work/.evidence/puzzle-late-review-1/`.
