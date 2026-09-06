@@ -88,3 +88,15 @@ The external `/work/.evidence/qa-result.json` named by the work order was not pr
 - Worker URL verification, live axe checks, keyboard/focus, 44 px targets, reduced motion, 200% text, links, route titles, designed HTTP 404, legal pages, dark preference, local-only traffic, and security headers passed.
 - Fresh mobile Lighthouse scored 100 Performance, 100 Accessibility, 100 Best Practices, and 100 SEO; LCP was 1.1 s, TBT 0 ms, CLS 0.036, and transfer 54 KiB.
 - Live JavaScript and CSS hashes match the fresh candidate build. Full report: `.factory/review-1.md`; evidence: `/work/.evidence/puzzle-late-review-1/`.
+
+## Review 2
+
+- Strict review verdict: **FAIL** — 1 major finding and 1 untested claim.
+- Candidate implementation: `fb43ad6020bfb715056d473ddc568ca0d93a15ad`; documentation baseline: `03a14c00c07172c939e209f23110a3ad31240adc`.
+- The first screen, deterministic desktop/phone win and loss runs, demo isolation/reset, local progress, keyboard and focus behavior, legal pages, designed HTTP 404, privacy traffic, reduced motion, security headers, and live/local asset hashes passed.
+- A clean clone passed all 13 declared command invocations, `npm test` (5 unit and 38 browser checks), `npm run test:claims` (2 unit and 22 browser outcomes), and `npm run build`.
+- The review opened all 40 puzzle records in isolated demo state and confirmed each configured answer renders its distinct ending. The semantic content audit found that Puzzles 35 and 40 each have a second choice satisfying the stated rule, while Puzzle 26 incorrectly describes the shortest shadow as occurring at dusk because the sun is higher.
+- The `authored-content` test only checks that the configured answer appears once in the choice array. It does not validate the deduction, so that public claim remains incompletely tested.
+- Fresh Lighthouse mobile scores were 100/100/100/100 with LCP 1.1 s, TBT 30 ms, CLS 0.036, and 54 KiB transfer. The 120-frame samples measured 59.0 fps desktop and 60.0 fps phone.
+- Required repair: disambiguate Puzzles 35 and 40, correct Puzzle 26, add semantic solution evidence, deploy, and review again.
+- Full report: `.factory/review-2.md`; evidence: `/work/.evidence/puzzle-late-review-2/`.
