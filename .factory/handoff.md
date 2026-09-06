@@ -4,7 +4,7 @@
 
 - Verdict: repaired and verified locally and live on 2026-09-06 UTC.
 - Implementation commit: `fb43ad6020bfb715056d473ddc568ca0d93a15ad`.
-- Documentation baseline: `073814f06564a66319cbb1903c64dc568b9a6bc3`.
+- Documentation baseline: `b239b70c340d39c583998d054d95af6074d0c36c`.
 - Live URL: `https://puzzle-late.sociobot.in`.
 - Product: a one-player browser anthology for daily-puzzle fans who want another short timing, shadow, or route deduction.
 - Stack: Vite and vanilla TypeScript. Static output is in `dist/`; there is no backend or shared database.
@@ -68,3 +68,12 @@ The first generic `swa deploy` attempt authenticated but stalled while retrievin
 Billing registration is still external and intentionally unavailable. The five free puzzles work. The 35 paid puzzles remain authored and locked. `.factory/billing-offer.json` records the one-time offer with null price and currency because no public price, checkout, or license-validation path has been registered. The billing operator must register those values before purchase or activation is enabled.
 
 The external `/work/.evidence/qa-result.json` named by the work order was not present in this worker. The complete committed `.factory/verification-1.md` was used as the 12-finding source of truth, alongside all earlier handoff revisions in git history.
+
+## Verification 2
+
+- Independent verdict: **PASS** — zero findings and zero untested claims.
+- Candidate implementation reviewed: `fb43ad6020bfb715056d473ddc568ca0d93a15ad`; documentation baseline: `b239b70c340d39c583998d054d95af6074d0c36c`.
+- A fresh detached checkout completed `npm ci`, all 13 declared claim commands, `npm test` (5 unit and 38 browser checks), and `npm run build`.
+- The full 38-check Playwright suite also passed directly against the live URL. Fresh desktop and 390 px phone runs completed the isolated demo, win, loss, restart, reset, keyboard-focus, privacy, route, reduced-motion, and designed-404 paths.
+- Live main JavaScript and CSS match the fresh build byte for byte by SHA-256. The hashed JavaScript is immutable for one year.
+- Full evidence and earlier-finding disposition: `.factory/verification-2.md`. External QA report: `/work/.evidence/qa-report.md`; result JSON: `/work/.evidence/qa-result.json`.
