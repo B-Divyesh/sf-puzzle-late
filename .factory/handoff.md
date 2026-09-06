@@ -2,101 +2,58 @@
 
 ## Release
 
-- Verdict: repaired and verified locally and live on 2026-09-06 UTC.
-- Implementation commit: `fb43ad6020bfb715056d473ddc568ca0d93a15ad`.
-- Documentation baseline: `b239b70c340d39c583998d054d95af6074d0c36c`.
+- Verdict: repair 2 completed and verified locally and live on 2026-09-06 UTC.
+- Implementation commit: `08cf7a9907c135bfc0a490f8c5ff97a813494478`.
 - Live URL: `https://puzzle-late.sociobot.in`.
 - Product: a one-player browser anthology for daily-puzzle fans who want another short timing, shadow, or route deduction.
-- Stack: Vite and vanilla TypeScript. Static output is in `dist/`; there is no backend or shared database.
+- Stack: Vite and vanilla TypeScript. Static output is in `dist/`; there is no backend, shared database, or server-held product state.
 
 ## What changed
 
-- Put active play beside the job statement and sample action. At 1280×720 the game starts at y=117 and the first answer ends at y=579. At 390×664 it starts at y=296 and the first answer ends at y=647.
-- Made Settings a modal dialog with a focus loop, Escape close, and focus restoration. Win and loss headings now receive focus.
-- Raised every visible link and button target to at least 44×44 px, including the standalone 404 skip link.
-- Made Puzzles navigate to the shelf from every route, with History API, scroll, title, and focus restoration.
-- Limited static rewrites to `/demo`, `/privacy`, and `/terms`. Unknown public URLs now return HTTP 404 with the designed page.
-- Replaced the final-free-puzzle duplicate action with **Choose another free puzzle**.
-- Rewrote all 80 nudges so they teach a deduction step without naming an answer-only word or answer position. Unit validation covers all 40 puzzles.
-- Removed unsupported five-minute and public originality claims. Internal authorship and asset provenance remain documented in `.factory/design.md`.
-- Declared and tested demo persistence. The demo label remains visible across demo, privacy, and terms routes.
-- Added a confirmed real-progress reset in Settings that preserves the motion setting.
-- Added one-year immutable caching for hashed assets. The live JavaScript now returns `Cache-Control: public, max-age=31536000, immutable`.
-- Replaced the metaphorical loss heading with **Puzzle lost**.
+- Corrected Puzzle 26, **Rose roof**. It now compares a low morning sun with the higher near-midday sun, when a fixed roof casts a shorter shadow.
+- Corrected Puzzle 35, **Indigo bridge**. Its alternate return route now names and crosses the indigo bridge twice, so only the direct route satisfies “exactly once”.
+- Corrected Puzzle 40, **Fold line**. Its alternate return route now names and crosses the fold line twice, so only the direct route satisfies “once”.
+- Added an independent 40-row solution fixture with a written deduction and a validity result for every choice.
+- Replaced the structural authored-content claim check with a browser outcome test. It submits both rejected choices, reaches the loss state, restarts, submits the independently reviewed solution, and verifies the ending for all 40 puzzles on desktop and phone.
+- Added direct regression checks for crossing counts and the roof-shadow calculation. Structural validation is now described as structural and no longer stands in for clue semantics.
+- Updated the design record, claim contract, README, copy audit, version label, and package version to 1.1.1.
 
 ## Finding disposition
 
 | Finding | Result |
 | --- | --- |
-| F-01 first-screen game | Fixed; active game and first answer fit in both required initial viewports. |
-| F-02 focus failures | Fixed; modal trapping, Escape, opener restoration, and end-state focus are browser-tested. |
-| F-03 small targets | Fixed; desktop and phone checks cover home, demo, legal, and standalone 404 pages. |
-| F-04 dead Puzzles link | Fixed; legal-route navigation reaches and focuses the shelf. |
-| F-05 unknown URL returns 200 | Fixed; live unknown URLs return 404 and the designed recovery page. |
-| F-06 last free boundary | Fixed; no nonexistent next-puzzle action remains after Puzzle 5. |
-| F-07 spoiler claim | Fixed; all nudges were rewritten and the claim now has a full-collection test. |
-| F-08 five-minute claim | Fixed by removing the unsupported duration from public metadata and copy. |
-| F-09 originality claim | Fixed by removing unprovable public wording; provenance remains an internal design record. |
-| F-10 demo persistence claim | Fixed; claim declared and reload outcome tested. |
-| F-11 short asset cache | Fixed; live hashed assets have a one-year immutable policy. |
-| F-12 metaphorical loss heading | Fixed with the plain heading **Puzzle lost**. |
+| Review 2 F-01: invalid deductions in Puzzles 26, 35, and 40 | Fixed and verified in the live browser. The two alternate routes each use one mark; their direct routes complete. The corrected roof answer completes from a physically valid premise. |
+| Review 2 untested authored-content claim | Fixed. The declared claim command now plays all 120 answer outcomes against the independent solution audit in both viewport projects. |
+| Verification 1 F-01 through F-12 | Still resolved. The full live suite rechecked first-screen play, focus, targets, navigation, 404 status, free-five boundary, nudges, demo persistence, immutable caching, and plain loss copy. |
+| Billing registration dependency | Unchanged and accurately disclosed. Five puzzles remain free; the 35 paid puzzles remain authored and locked. |
 
-## Verification
+## Clean-checkout verification
 
-From the documented clean setup:
+A detached checkout of the implementation commit was used.
 
 - `npm ci` — passed; 63 packages installed and 0 vulnerabilities reported.
-- Every one of the 13 commands in `.factory/claims.json` — passed separately. Each unit claim ran once; every browser claim passed on desktop and phone.
-- `npm test` — passed on the final tree: 5 unit tests and 38 Playwright checks.
-- `npm run test:claims` — passed: 2 tagged unit outcomes and 22 tagged browser outcomes.
-- `npm run build` — passed; JavaScript is 40.59 KB raw / 13.12 KB gzip and CSS is 16.48 KB raw / 4.54 KB gzip.
-- Playwright axe integration — no serious or critical issues on home, demo, privacy, terms, in-app missing, or standalone 404 pages; light and dark preferences checked.
-- Worker URL verification on the final live deployment — HTTP 200, 617 ms load, no console errors, title, `lang`, one h1, main landmark, alt and button checks passed.
-- Live Lighthouse mobile — 100 Performance, 100 Accessibility, 100 Best Practices, 100 SEO; FCP 1.1 s, LCP 1.2 s, TBT 40 ms, CLS 0.036, 54 KiB transfer.
-- Live 390 px frame sample — 120 frames, 16.42 ms mean, 16.7 ms median, about 60.9 fps. This is verification evidence, not public copy.
-- Full live Playwright suite — 38 desktop/phone checks passed on the unchanged main JS/CSS bundle. After the final 404-only adjustment, 6 additional live route, touch-target, and axe checks passed.
-- Live headers — unknown URL 404; known routes 200; CSP, HSTS, nosniff, referrer, and permissions policies present; hashed JavaScript cache is immutable for one year.
+- Every command in `.factory/claims.json` — passed separately. There are 13 declared claims and one matching test tag for each.
+- `npm test` — passed: 7 unit checks and 40 Playwright desktop/phone checks.
+- `npm run build` — passed and produced `dist/`.
+- Production sizes: JavaScript 40,663 bytes / 13.12 KB gzip; CSS 16,480 bytes / 4.54 KB gzip. Loaded WOFF2 fonts total 35,304 bytes.
 
-The deterministic live run entered `/demo`, showed Puzzle 3 and two completed samples, revealed both nudges, selected **Cup**, and reached **Puzzle complete** with its ending. A replay selected **Spoon** and **Kettle**, reached **Puzzle lost**, then restarted with two marks. Reset restored two sample completions. Fresh desktop and 390 px phone contexts made only same-origin requests and logged no console errors. Screenshots and videos are under `/work/.evidence/puzzle-late-repair/`.
+## Live verification
 
-## Deployment
+- The product-scoped static deployment reused `sf-puzzle-late` in its existing region and preserved the production custom domain. Managed HTTPS returned 200.
+- The worker URL check passed in 845 ms with no console errors: descriptive title, `lang="en"`, one h1, one main landmark, complete image alt coverage, and labeled buttons.
+- Standalone axe-core CLI found 0 violations. The Playwright axe checks also found no serious or critical issues on home, demo, privacy, terms, in-app missing, standalone 404, and dark-preference pages.
+- Live Lighthouse mobile: 100 Performance, 100 Accessibility, 100 Best Practices, and 100 SEO; FCP 1.2 s, LCP 1.2 s, TBT 0 ms, CLS 0.036, and 54 KiB transfer.
+- The complete Playwright suite passed all 40 checks directly against the live origin.
+- The live JavaScript and CSS match the local production build by SHA-256. JavaScript: `ffcf5970c2d6715300657f4de4aa83c032e20b3a2e6662d02f973ae316b68b2a`; CSS: `2aa4dc00bf8ab68337d781f493f15243cf4ca8299cd4bf10b1bf1ef8e4d7a41d`.
+- Hashed JavaScript returns `Cache-Control: public, max-age=31536000, immutable`. The CSP, HSTS, nosniff, referrer, and permissions headers are present. An unknown path deliberately returns the designed HTTP 404.
+- At 1280×720 the game begins at y=117 and the first answer ends at y=579. At 390×664 the game begins at y=296 and the first answer ends at y=647.
+- Fresh desktop and phone runs entered the sample in one click, showed the persistent demo label, completed Puzzle 3, reloaded to three completions, reset to two, reached the loss screen, restarted with two marks, and left demo mode with real progress unchanged. Only the product origin was requested.
+- A live 390 px frame sample recorded 119 intervals at 16.67 ms mean and 16.7 ms median, about 60.0 fps. This remains verification evidence, not public copy.
 
-The first generic `swa deploy` attempt authenticated but stalled while retrieving app settings and was stopped. Its generated `.env` credential file was deleted without being read. The product-scoped factory deployment helper then reused only `sf-puzzle-late`, deployed successfully, preserved the existing custom domain, and confirmed managed HTTPS. The final deployed implementation is `fb43ad6020bfb715056d473ddc568ca0d93a15ad`; the live main assets are `index-DonU6JX1.js` and `index-BTlkkWvI.css`.
+Evidence is under `/work/.evidence/puzzle-late-repair-2/`, including the sample run, repaired-puzzle run, first screens, win/loss screens, route-alternate screens, axe output, URL verification, and Lighthouse report.
 
-## Known dependency
+## Known dependency and next step
 
-Billing registration is still external and intentionally unavailable. The five free puzzles work. The 35 paid puzzles remain authored and locked. `.factory/billing-offer.json` records the one-time offer with null price and currency because no public price, checkout, or license-validation path has been registered. The billing operator must register those values before purchase or activation is enabled.
+There are no known product-code gaps. Billing registration is still external and intentionally unavailable. `.factory/billing-offer.json` records the one-time offer with null price and currency because no public price, checkout, or license-validation path exists. The separate billing operator must register those exact values before purchase or activation is enabled. The product must not guess a price or expose the 35 paid puzzles for free to hide this dependency.
 
-The external `/work/.evidence/qa-result.json` named by the work order was not present in this worker. The complete committed `.factory/verification-1.md` was used as the 12-finding source of truth, alongside all earlier handoff revisions in git history.
-
-## Verification 2
-
-- Independent verdict: **PASS** — zero findings and zero untested claims.
-- Candidate implementation reviewed: `fb43ad6020bfb715056d473ddc568ca0d93a15ad`; documentation baseline: `b239b70c340d39c583998d054d95af6074d0c36c`.
-- A fresh detached checkout completed `npm ci`, all 13 declared claim commands, `npm test` (5 unit and 38 browser checks), and `npm run build`.
-- The full 38-check Playwright suite also passed directly against the live URL. Fresh desktop and 390 px phone runs completed the isolated demo, win, loss, restart, reset, keyboard-focus, privacy, route, reduced-motion, and designed-404 paths.
-- Live main JavaScript and CSS match the fresh build byte for byte by SHA-256. The hashed JavaScript is immutable for one year.
-- Full evidence and earlier-finding disposition: `.factory/verification-2.md`. External QA report: `/work/.evidence/qa-report.md`; result JSON: `/work/.evidence/qa-result.json`.
-
-## Review 1
-
-- Strict fresh-review verdict: **PASS** — 0 findings and 0 untested claims.
-- Candidate implementation: `fb43ad6020bfb715056d473ddc568ca0d93a15ad`; documentation baseline: `a9d576068c5d613970d32117cd2443a2025257f9`.
-- A fresh clone passed `npm ci`, all 13 claim commands separately, `npm test` (5 unit and 38 browser checks), and `npm run build`.
-- The unchanged live implementation passed the full 38-check desktop/phone suite. Fresh recorded contexts also completed sample entry, both nudges, win, reload persistence, reset, loss, restart, and demo exit without changing real progress.
-- All 40 puzzle records were inspected for a supported selectable answer, two spoiler-free nudges, and a distinct ending.
-- Worker URL verification, live axe checks, keyboard/focus, 44 px targets, reduced motion, 200% text, links, route titles, designed HTTP 404, legal pages, dark preference, local-only traffic, and security headers passed.
-- Fresh mobile Lighthouse scored 100 Performance, 100 Accessibility, 100 Best Practices, and 100 SEO; LCP was 1.1 s, TBT 0 ms, CLS 0.036, and transfer 54 KiB.
-- Live JavaScript and CSS hashes match the fresh candidate build. Full report: `.factory/review-1.md`; evidence: `/work/.evidence/puzzle-late-review-1/`.
-
-## Review 2
-
-- Strict review verdict: **FAIL** — 1 major finding and 1 untested claim.
-- Candidate implementation: `fb43ad6020bfb715056d473ddc568ca0d93a15ad`; documentation baseline: `03a14c00c07172c939e209f23110a3ad31240adc`.
-- The first screen, deterministic desktop/phone win and loss runs, demo isolation/reset, local progress, keyboard and focus behavior, legal pages, designed HTTP 404, privacy traffic, reduced motion, security headers, and live/local asset hashes passed.
-- A clean clone passed all 13 declared command invocations, `npm test` (5 unit and 38 browser checks), `npm run test:claims` (2 unit and 22 browser outcomes), and `npm run build`.
-- The review opened all 40 puzzle records in isolated demo state and confirmed each configured answer renders its distinct ending. The semantic content audit found that Puzzles 35 and 40 each have a second choice satisfying the stated rule, while Puzzle 26 incorrectly describes the shortest shadow as occurring at dusk because the sun is higher.
-- The `authored-content` test only checks that the configured answer appears once in the choice array. It does not validate the deduction, so that public claim remains incompletely tested.
-- Fresh Lighthouse mobile scores were 100/100/100/100 with LCP 1.1 s, TBT 30 ms, CLS 0.036, and 54 KiB transfer. The 120-frame samples measured 59.0 fps desktop and 60.0 fps phone.
-- Required repair: disambiguate Puzzles 35 and 40, correct Puzzle 26, add semantic solution evidence, deploy, and review again.
-- Full report: `.factory/review-2.md`; evidence: `/work/.evidence/puzzle-late-review-2/`.
+No offline, install/update, backend, tenant, health, rate-limit, multiplayer, AI, or public frame-rate behavior is promised; those checks are not applicable to this static one-player anthology.
