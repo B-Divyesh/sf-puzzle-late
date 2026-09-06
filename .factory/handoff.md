@@ -1,5 +1,41 @@
 # Puzzle Late handoff
 
+## Repair 3 — public social-art disclosure
+
+- Current result on 2026-09-06 UTC: **PASS — the Review 3 minor finding is resolved; no product finding or untested public claim remains.**
+- Deployed implementation: `9ba4ada51159d6de6304154f45affc55ba3bacf4` (`fix: disclose generated social artwork`), version 1.1.2.
+- Scope: the generated 1200×630 Open Graph/Twitter social image already had full internal provenance. This repair adds the required visitor-facing disclosure without changing gameplay, storage, payment availability, or the anthology’s paid boundary.
+
+### What changed
+
+- Added **“Social preview artwork was generated for Puzzle Late.”** to the shared application footer on home, demo, privacy, terms, and in-app missing-page routes.
+- Added the same disclosure to the standalone public `/404.html` footer, which handles deliberate unknown-path HTTP 404 responses.
+- Recorded the public disclosure in `.factory/design.md` and the landing-copy audit, bumped the build label to 1.1.2, and added a browser regression that loads every public footer in desktop and phone profiles.
+
+### Verification
+
+- Clean prerequisites: `npm ci` installed 63 packages with 0 reported vulnerabilities.
+- `npm test` passed: 7 unit checks and 42 Playwright checks across desktop and phone. The complete local outcome file reports `passed`.
+- `npm run build` passed and produced `dist/`.
+- Every one of the 13 commands in `.factory/claims.json` passed separately. This includes the full `@claim:authored-content` browser audit, which plays both rejected choices, restarts, and completes the independently reviewed answer for every one of 40 puzzles in both profiles.
+- The new disclosure regression passed on desktop and phone across `/`, `/demo`, `/privacy`, `/terms`, `/404.html`, and `/not-a-puzzle`.
+- Local production-preview `verify-url.sh` passed with no console errors, a descriptive title, `lang="en"`, one h1, a main landmark, complete image-alt coverage, and labeled buttons. The existing Playwright axe integration passed across all public routes.
+
+### Deployment and live checks
+
+- Pushed and deployed the implementation to the existing product static app, `sf-puzzle-late`, preserving the product’s static configuration, custom domain, immutable asset-cache rule, and no-backend architecture. Managed HTTPS returned 200.
+- Fresh desktop (1280×720) and phone (390×664) contexts loaded `https://puzzle-late.sociobot.in/` with no console errors. Before scrolling they stated the job **Solve visual deduction puzzles**, the audience **For daily-puzzle fans who want another short challenge now.**, and the first action **Try it with sample data** / **Opens Puzzle 3 with two completed.** The active game and first answer fit both viewports, and the new disclosure was visible in each footer.
+- Live `verify-url.sh` passed. The full deployed Playwright suite passed all 42 checks in fresh desktop and phone contexts, including the real/demo run, win, loss, reset, restart, privacy, route, reduced-motion, accessibility, and disclosure checks.
+- Live JavaScript exactly matches the build: SHA-256 `bed513389482772b8e490e9796895eb47235c429d491172f955126d564329ebe`. CSS SHA-256 is `6e6ec58e62635618fb3cf3bcc13c59810b4e3a252cf57f07b75c78401e036ea0`.
+- Live hashed assets return `Cache-Control: public, max-age=31536000, immutable`; CSP, HSTS, `nosniff`, referrer, and permissions headers are present. `/not-a-puzzle` deliberately returns HTTP 404 and the public static 404 includes the disclosure.
+- Fresh mobile Lighthouse: Performance 100, Accessibility 100, Best Practices 100, SEO 100; FCP 1,063 ms, LCP 1,138 ms, TBT 28 ms, CLS 0.036, transfer 54,884 bytes.
+- Build payload: JavaScript 40,761 bytes / 13,138 bytes gzip; CSS 16,525 bytes / 4,565 bytes gzip; loaded WOFF2 assets 35,304 bytes. The product remains below static page-load budgets.
+- Evidence: `/work/.evidence/puzzle-late-repair-3/`, including local/live URL verification, fresh first-screen captures, mobile Lighthouse JSON, and the copied catalog description at `/work/.evidence/catalog-description.txt`.
+
+### Known external dependency
+
+Billing registration remains a separate operator responsibility. Checkout and license activation are still unavailable, the purchase control remains disabled, no billing request is made, and the 35 paid anthology puzzles remain locked rather than being made free. `.factory/billing-offer.json` accurately records the unregistered one-time offer with no guessed price or credentials. There are no remaining product-code gaps.
+
 ## Review 3
 
 - Strict review verdict on 2026-09-06 UTC: **FAIL — 1 minor finding and 0 untested claims.**
